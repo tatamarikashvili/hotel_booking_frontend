@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>სასტუმროს დაჯავშნის სააგენტო</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="https://cdn-icons-png.flaticon.com/512/888/888063.png" alt="სასტუმროს ლოგო" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#">მთავარი</a></li>
+                <li><a href="#rooms">ოთახები</a></li>
+                <li><a href="#booking">დაჯავშნა</a></li>
+                <li><a href="#contact">კონტაქტი</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="intro">
+        <h1>მოგესალმებით სასტუმრო "Sunlight"-ში ☀️</h1>
+        <p>აირჩიეთ ნომერი, შეარჩიეთ დღეების რაოდენობა და დაჯავშნეთ მარტივად.</p>
+    </section>
+
+    <section id="rooms" class="rooms">
+        <h2>ოთახების ჩამონათვალი</h2>
+        <div class="room-list">
+            <div class="room-card" data-name="Standard" data-price="120">
+                <h3>სტანდარტული ოთახი</h3>
+                <p>ტიპი: Standard</p>
+                <p>ფასი: 120₾ / ღამე</p>
+                <p class="status">სტატუსი: თავისუფალია</p>
+            </div>
+
+            <div class="room-card" data-name="Deluxe" data-price="180">
+                <h3>დელუქსი</h3>
+                <p>ტიპი: Deluxe</p>
+                <p>ფასი: 180₾ / ღამე</p>
+                <p class="status">სტატუსი: თავისუფალია</p>
+            </div>
+
+            <div class="room-card" data-name="Suite" data-price="250">
+                <h3>სუიტი</h3>
+                <p>ტიპი: Suite</p>
+                <p>ფასი: 250₾ / ღამე</p>
+                <p class="status">სტატუსი: დაკავებულია</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking">
+        <h2>დაჯავშნე ოთახი</h2>
+        <form id="booking-form">
+            <label for="room">აირჩიეთ ოთახი:</label>
+            <select id="room" required>
+                <option value="">აირჩიეთ...</option>
+                <option value="Standard">სტანდარტული — 120₾</option>
+                <option value="Deluxe">დელუქსი — 180₾</option>
+                <option value="Suite">სუიტი — 250₾</option>
+            </select>
+
+            <label for="days">დღეების რაოდენობა:</label>
+            <input type="number" id="days" min="1" max="30" value="1" required>
+
+            <button type="button" id="book-btn">დაჯავშნა</button>
+        </form>
+
+        <p id="booking-status"></p>
+    </section>
+
+    <footer id="contact">
+        <p>© 2025 სასტუმროს დაჯავშნის სააგენტო | ყველა უფლება დაცულია</p>
+    </footer>
+
+    <script>
+        const button = document.getElementById("book-btn");
+        const statusText = document.getElementById("booking-status");
+
+        button.addEventListener("click", () => {
+            const room = document.getElementById("room").value;
+            const days = parseInt(document.getElementById("days").value, 10);
+
+            if (!room || days < 1) {
+                statusText.innerText = "გთხოვთ შეავსოთ ყველა ველი.";
+                statusText.style.color = "red";
+                return;
+            }
+
+            let price = 0;
+            if (room === "Standard") price = 120;
+            if (room === "Deluxe") price = 180;
+            if (room === "Suite") price = 250;
+
+            const total = price * days;
+            statusText.innerText = `თქვენ დაჯავშნეთ ${room} ოთახი ${days} დღით. ჯამური ღირებულება: ${total}₾.`;
+            statusText.style.color = "green";
+        });
+    </script>
+</body>
+</html>
